@@ -1,0 +1,52 @@
+{% load socialaccount %}
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTTPS Login</title>
+    <style>
+      .social-login {
+        margin: 20px 0;
+      }
+      .social-login a {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 5px;
+        text-decoration: none;
+        color: white;
+        border-radius: 5px;
+      }
+      .google {
+        background-color: #db4437;
+      }
+      .github {
+        background-color: #333;
+      }
+      .naver {
+        background-color: #1ec800;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>HTTPS Login</h1>
+
+    {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}!</p>
+    <a href="{% url 'account_logout' %}">Logout</a>
+    {% else %}
+    <p>Please login with your social account:</p>
+    <div class="social-login">
+      <a href="{% url 'socialaccount_connections' %}" class="google"
+        >Google Login</a
+      >
+      <a href="{% url 'socialaccount_connections' %}" class="github"
+        >GitHub Login</a
+      >
+      <a href="{% url 'socialaccount_connections' %}" class="naver"
+        >Naver Login</a
+      >
+    </div>
+    {% endif %}
+  </body>
+</html>
